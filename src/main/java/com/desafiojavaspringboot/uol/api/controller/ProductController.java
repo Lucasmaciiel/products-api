@@ -1,6 +1,7 @@
 package com.desafiojavaspringboot.uol.api.controller;
 
 import com.desafiojavaspringboot.uol.api.model.Product;
+import com.desafiojavaspringboot.uol.api.repository.ProductRepository;
 import com.desafiojavaspringboot.uol.api.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService service;
+    private final ProductRepository repository;
 
     @CrossOrigin
     @ApiOperation(value = "Create a product")
@@ -82,6 +84,19 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {
         List<Product> products = this.service.findAll();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @ApiOperation(value = "Filter")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success")
+    })
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> findByFilter(@RequestParam(required = false) String q,
+                                                @RequestParam(required = false) Double min_price,
+                                                @RequestParam(required = false) Double max_price) {
+        List<Product> products = this.service.findByFilter(q, min_price, max_price);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

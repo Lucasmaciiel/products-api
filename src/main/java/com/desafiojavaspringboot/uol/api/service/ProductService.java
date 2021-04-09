@@ -2,7 +2,11 @@ package com.desafiojavaspringboot.uol.api.service;
 
 import com.desafiojavaspringboot.uol.api.model.Product;
 import com.desafiojavaspringboot.uol.api.repository.ProductRepository;
+import com.desafiojavaspringboot.uol.api.repository.filter.FilterMaxPrice;
+import com.desafiojavaspringboot.uol.api.repository.filter.FilterMinPrice;
+import com.desafiojavaspringboot.uol.api.repository.filter.FilterNameDescription;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +51,12 @@ public class ProductService {
 
     }
 
+    public List<Product> findByFilter(String q, Double min_price, Double max_price) {
+        Specification<Product> specification = Specification
+                .where(new FilterNameDescription(q))
+                .and(new FilterMinPrice(min_price))
+                .and(new FilterMaxPrice(max_price));
+        return repository.findAll(specification);
+    }
 
 }
