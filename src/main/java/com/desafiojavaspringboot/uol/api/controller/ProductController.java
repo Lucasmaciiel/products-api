@@ -21,7 +21,6 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService service;
-    private final ProductRepository repository;
 
     @CrossOrigin
     @ApiOperation(value = "Create a product")
@@ -57,7 +56,8 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> findById(@PathVariable("id") Integer id) {
         Optional<Product> product = this.service.findById(id);
-        return product.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+        return product.map(value ->
+                        new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

@@ -62,6 +62,10 @@
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+		</dependency>
 		<!-- Documentação do Swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>

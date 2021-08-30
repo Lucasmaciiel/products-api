@@ -1,6 +1,7 @@
 package com.desafiojavaspringboot.uol.api.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
