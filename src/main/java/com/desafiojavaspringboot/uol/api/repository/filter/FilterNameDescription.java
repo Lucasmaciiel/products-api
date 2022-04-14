@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 public class FilterNameDescription implements Specification<Product> {
 
     private final String q;
+
     @Override
     public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if (q == null){

@@ -39,9 +39,7 @@ class ProductServiceTest {
 
         List<Product> productList = service.findAll();
 
-        assertThat(productList.size())
-                .isNotNull()
-                .isEqualTo(1);
+        assertThat(productList).hasSize(1);
 
         assertThat(productList.get(0).getId())
                 .isNotNull();

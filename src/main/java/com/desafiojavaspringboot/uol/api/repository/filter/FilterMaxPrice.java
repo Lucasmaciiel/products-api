@@ -12,14 +12,14 @@ import javax.persistence.criteria.Root;
 @RequiredArgsConstructor
 public class FilterMaxPrice implements Specification<Product> {
 
-    private final Double max_price;
+    private final Double maxPrice;
 
     @Override
     public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        if (max_price == null) {
+        if (maxPrice == null) {
             return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
         } else {
-            return criteriaBuilder.lessThanOrEqualTo(root.get("price"), this.max_price.toString());
+            return criteriaBuilder.lessThanOrEqualTo(root.get("price"), this.maxPrice.toString());
         }
     }
 }

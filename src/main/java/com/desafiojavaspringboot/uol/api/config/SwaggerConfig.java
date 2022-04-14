@@ -6,7 +6,6 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -28,7 +27,7 @@ public class SwaggerConfig {
                                 "Product API", "Microservice for product registration", "1.0", "urn:tos",
                                 new Contact("Lucas Maciel", "https://br.linkedin.com/in/lucasmacielgois", "lucasmacielgois@gmail.com"),
                                 "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0",
-                                new ArrayList<VendorExtension>()));
+                                new ArrayList<>()));
     }
 
 

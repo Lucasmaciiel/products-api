@@ -11,15 +11,15 @@ import javax.persistence.criteria.Root;
 @RequiredArgsConstructor
 public class FilterMinPrice implements Specification<Product> {
 
-    private final Double min_price;
+    private final Double minPrice;
 
     @Override
     public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        if (min_price == null){
+        if (minPrice == null){
             return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
         }
         else {
-            return criteriaBuilder.greaterThanOrEqualTo(root.get("price"), this.min_price.toString());
+            return criteriaBuilder.greaterThanOrEqualTo(root.get("price"), this.minPrice.toString());
         }
     }
 }

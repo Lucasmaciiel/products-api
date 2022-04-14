@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +22,14 @@ public class ProductService {
     private final ProductRepository repository;
 
     public Product save(Product product) {
+        var productExisting = this.findById(product.getId()).get();
+
+        if (productExisting != null)
+            throw new EntityExistsException("Product already exists", new ResponseStatusException(HttpStatus.BAD_REQUEST));
+
         return repository.save(product);
     }
 
-    @Transactional
     public void updateProduct(Integer id, Product product) {
         this.repository.findById(id)
                 .map(productExisting -> {
@@ -51,11 +55,11 @@ public class ProductService {
 
     }
 
-    public List<Product> findByFilter(String q, Double min_price, Double max_price) {
+    public List<Product> findByFilter(String q, Double minPrice, Double maxPrice) {
         Specification<Product> specification = Specification
                 .where(new FilterNameDescription(q))
-                .and(new FilterMinPrice(min_price))
-                .and(new FilterMaxPrice(max_price));
+                .and(new FilterMinPrice(minPrice))
+                .and(new FilterMaxPrice(maxPrice));
         return repository.findAll(specification);
     }
 
